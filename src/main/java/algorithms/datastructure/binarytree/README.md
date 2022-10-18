@@ -14,6 +14,12 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> postOrder();
 
     void remove(T value);
+
+    int[] toOriginalArrayList(List<Integer> preOrderTraverse);
+
+    List<T> leftView();
+
+    List<T> rightView();
 }
 ```
 
@@ -40,6 +46,16 @@ Postorder traversal
 ## void remove(T value)
 
 To remove a node from a tree
+
+## int[] toOriginalArrayList(List<Integer> preOrderTraverse)
+
+transforms a pre-order traverse of a balanced BST to the original sorted array
+
+## List<T> leftView()
+Return the left view of a binary tree 
+
+## List<T> rightView()
+Return the right view of a binary tree
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 

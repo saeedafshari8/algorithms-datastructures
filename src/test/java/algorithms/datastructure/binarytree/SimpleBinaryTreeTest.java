@@ -2,12 +2,15 @@ package algorithms.datastructure.binarytree;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BinaryTreeTest {
+public class SimpleBinaryTreeTest {
 
     @Test
     void parseBalancedTreeWorksCorrectlyPreOrderEvenNumbers() {
@@ -113,6 +116,39 @@ public class BinaryTreeTest {
         simpleBinaryTree.remove(3);
 
         assertEquals(Collections.emptyList(), simpleBinaryTree.preOrder());
+    }
+
+    @Test
+    void toOriginalArrayReturnsCorrectResult() {
+        Integer[] array = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(array);
+
+        String actual = Arrays.stream(simpleBinaryTree.toOriginalArrayList(simpleBinaryTree.preOrder())).filter(Objects::nonNull).mapToObj(String::valueOf).collect(Collectors.joining(","));
+
+        var expected = "1,2,3,4,5";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void leftViewReturnsCorrectList() {
+        Integer[] array = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(array);
+
+        String actual = simpleBinaryTree.leftView().stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        var expected = "3,1,2";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void rightViewReturnsCorrectList() {
+        Integer[] array = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(array);
+
+        String actual = simpleBinaryTree.rightView().stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        var expected = "3,4,5";
+        assertEquals(expected, actual);
     }
 
     private static String arrayToString(List<Integer> result) {

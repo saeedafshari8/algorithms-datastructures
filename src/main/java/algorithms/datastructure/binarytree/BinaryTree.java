@@ -14,4 +14,10 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> postOrder();
 
     void remove(T value);
+
+    int[] toOriginalArrayList(List<Integer> preOrderTraverse);
+
+    List<T> leftView();
+
+    List<T> rightView();
 }

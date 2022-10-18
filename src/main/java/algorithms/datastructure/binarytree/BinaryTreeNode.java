@@ -7,8 +7,8 @@ import java.util.List;
 
 class BinaryTreeNode<T extends Comparable<T>> {
 
-    private BinaryTreeNode<T> left;
-    private BinaryTreeNode<T> right;
+    BinaryTreeNode<T> left;
+    BinaryTreeNode<T> right;
     @Getter
     private T value;
 
