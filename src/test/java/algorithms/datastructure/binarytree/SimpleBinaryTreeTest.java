@@ -181,6 +181,26 @@ public class SimpleBinaryTreeTest {
         assertEquals(0, height);
     }
 
+    @Test
+    void nodesAtLevelReturnsCorrectList() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        String actual = simpleBinaryTree.nodesAtLevel(2).stream().map(String::valueOf).collect(Collectors.joining(","));
+
+        assertEquals("1,4", actual);
+    }
+
+    @Test
+    void nodesAtLevelThrowsWhenLevelIsHigherThanTheHeightOfTree() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> simpleBinaryTree.nodesAtLevel(4));
+
+        assertEquals("The level should be less than or equals with the height of the tree.[Height=3]", exception.getMessage());
+    }
+
     private static String arrayToString(List<Integer> result) {
         return String.join(",", result.stream().map(String::valueOf).toList());
     }

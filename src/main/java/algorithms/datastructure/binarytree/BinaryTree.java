@@ -22,4 +22,6 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> rightView();
 
     int height();
+
+    List<T> nodesAtLevel(int level);
 }

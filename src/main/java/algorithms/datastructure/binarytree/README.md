@@ -22,6 +22,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> rightView();
 
     int height();
+
+    List<T> nodesAtLevel(int level);
 }
 ```
 
@@ -64,6 +66,10 @@ Return the right view of a binary tree
 ## int height()
 
 Return the height of a tree
+
+## List<T> nodesAtLevel(int level)
+
+Returns nodes at the specified level of a tree
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 
