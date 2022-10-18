@@ -151,6 +151,36 @@ public class SimpleBinaryTreeTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void heightReturnsCorrectValue() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5, 6};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        int height = simpleBinaryTree.height();
+
+        assertEquals(3, height);
+    }
+
+    @Test
+    void heightReturnsCorrectValue2() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        int height = simpleBinaryTree.height();
+
+        assertEquals(2, height);
+    }
+
+    @Test
+    void heightReturnsCorrectValueWhenTreeIsEmpty() {
+        Integer[] sortedArray = new Integer[0];
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        int height = simpleBinaryTree.height();
+
+        assertEquals(0, height);
+    }
+
     private static String arrayToString(List<Integer> result) {
         return String.join(",", result.stream().map(String::valueOf).toList());
     }

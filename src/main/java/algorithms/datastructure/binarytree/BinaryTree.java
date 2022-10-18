@@ -20,4 +20,6 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> leftView();
 
     List<T> rightView();
+
+    int height();
 }

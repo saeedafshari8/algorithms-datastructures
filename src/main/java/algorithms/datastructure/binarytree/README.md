@@ -20,6 +20,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> leftView();
 
     List<T> rightView();
+
+    int height();
 }
 ```
 
@@ -52,10 +54,16 @@ To remove a node from a tree
 transforms a pre-order traverse of a balanced BST to the original sorted array
 
 ## List<T> leftView()
-Return the left view of a binary tree 
+
+Return the left view of a binary tree
 
 ## List<T> rightView()
+
 Return the right view of a binary tree
+
+## int height()
+
+Return the height of a tree
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 
