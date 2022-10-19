@@ -150,6 +150,68 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
         return maxHeight;
     }
 
+    @Override
+    public void swap(T value1, T value2) {
+        if (root == null) throw new IllegalStateException("Tree is null");
+        if (root.getValue() == value1 || root.getValue() == value2)
+            throw new IllegalStateException("Swapping root node is not possible");
+        BinaryTreeNode<T> parentNode1 = getParent(value1);
+        BinaryTreeNode<T> parentNode2 = getParent(value2);
+        BinaryTreeNode<T> node1ToSwap;
+        BinaryTreeNode<T> node2ToSwap;
+
+        boolean isNode1LeftChild = false;
+        if (parentNode1.left.getValue() == value1) {
+            node1ToSwap = parentNode1.left;
+            isNode1LeftChild = true;
+        } else node1ToSwap = parentNode1.right;
+
+        if (node1ToSwap == null) throw new IllegalStateException("Node not found");
+
+        boolean isNode2LeftChild = false;
+        if (parentNode2.left.getValue() == value2) {
+            node2ToSwap = parentNode2.left;
+            isNode2LeftChild = true;
+        } else node2ToSwap = parentNode2.right;
+
+        if (node2ToSwap == null) throw new IllegalStateException("Node not found");
+
+        if (node1ToSwap == node2ToSwap) return;
+
+        if (isNode1LeftChild) {
+            parentNode1.left = node2ToSwap;
+        } else {
+            parentNode1.right = node2ToSwap;
+        }
+
+        if (isNode2LeftChild) {
+            parentNode2.left = node1ToSwap;
+        } else {
+            parentNode2.right = node1ToSwap;
+        }
+    }
+
+    private BinaryTreeNode<T> getParent(T value) {
+        BinaryTreeNode<T> parent = getParentRecursive(null, root, value);
+        if (parent == null && root.getValue() != value)
+            throw new IllegalStateException("Node not found");
+        return parent;
+    }
+
+    private BinaryTreeNode<T> getParentRecursive(BinaryTreeNode<T> parentNode, BinaryTreeNode<T> node, T value) {
+        if (node.getValue() == value) return parentNode;
+        if (node.left != null) {
+            if (node.left.getValue() == value) return node;
+            BinaryTreeNode<T> parent = getParentRecursive(node, node.left, value);
+            if (parent != null) return parent;
+        }
+        if (node.right != null) {
+            if (node.right.getValue() == value) return node;
+            return getParentRecursive(node, node.right, value);
+        }
+        return null;
+    }
+
     public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray) {
         if (sortedArray.length == 0) return new SimpleBinaryTree<>();
         BinaryTreeNode<T> node = new BinaryTreeNode<T>().parseBalancedTree(sortedArray);

@@ -201,6 +201,50 @@ public class SimpleBinaryTreeTest {
         assertEquals("The level should be less than or equals with the height of the tree.[Height=3]", exception.getMessage());
     }
 
+    @Test
+    void swapWorksCorrectlyWhenNodesAreAvailable() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        simpleBinaryTree.swap(1, 4);
+
+        String actual = arrayToString(simpleBinaryTree.preOrder());
+        String expected = "3,4,5,1,2";
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void swapWorksCorrectlyWhenNodesAreTheSame() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        simpleBinaryTree.swap(1, 1);
+
+        String actual = arrayToString(simpleBinaryTree.preOrder());
+        String expected = "3,1,2,4,5";
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void swapThrowsWhenTryingToSwapRootNode() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> simpleBinaryTree.swap(3, 1));
+
+        assertEquals("Swapping root node is not possible", exception.getMessage());
+    }
+
+    @Test
+    void swapThrowsWhenNodeIsMissing() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> simpleBinaryTree.swap(1, 8));
+
+        assertEquals("Node not found", exception.getMessage());
+    }
+
     private static String arrayToString(List<Integer> result) {
         return String.join(",", result.stream().map(String::valueOf).toList());
     }

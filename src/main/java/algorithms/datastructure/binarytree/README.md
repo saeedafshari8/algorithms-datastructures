@@ -24,6 +24,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     int height();
 
     List<T> nodesAtLevel(int level);
+
+    void swap(T value1, T value2);
 }
 ```
 
@@ -70,6 +72,10 @@ Return the height of a tree
 ## List<T> nodesAtLevel(int level)
 
 Returns nodes at the specified level of a tree
+
+## void swap(T value1, T value2)
+
+Swaps two nodes in a binary tree
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 
