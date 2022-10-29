@@ -26,6 +26,34 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> nodesAtLevel(int level);
 
     void swap(T value1, T value2);
+
+    void insert(T value);
+
+    boolean contains(T value);
+
+    List<T> preOrder();
+
+    List<T> inOrder();
+
+    List<T> postOrder();
+
+    void remove(T value);
+
+    int[] toOriginalArrayList(List<Integer> preOrderTraverse);
+
+    List<T> leftView();
+
+    List<T> rightView();
+
+    int height();
+
+    List<T> nodesAtLevel(int level);
+
+    void swap(T value1, T value2);
+
+    List<T> getPathTo(T value);
+
+    List<T> getLeaves();
 }
 ```
 
@@ -76,6 +104,14 @@ Returns nodes at the specified level of a tree
 ## void swap(T value1, T value2)
 
 Swaps two nodes in a binary tree
+
+## List<T> getPathTo(T value)
+
+Returns the path to a node
+
+## List<T> getLeaves()
+
+Returns a tree leaves
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 

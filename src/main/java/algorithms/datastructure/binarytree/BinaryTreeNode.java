@@ -131,4 +131,38 @@ class BinaryTreeNode<T extends Comparable<T>> {
             this.right.remove(value);
         }
     }
+
+    public List<T> getPathTo(T value) {
+        List<T> path = new ArrayList<>();
+        getPathToRecursive(value, path);
+        return path;
+    }
+
+    private void getPathToRecursive(T value, List<T> path) {
+        path.add(this.value);
+        if (value.compareTo(this.value) == 0) return;
+        if (left == null && right == null) {
+            path.remove(path.size() - 1);
+            return;
+        }
+        if (left != null) left.getPathToRecursive(value, path);
+        if (right != null) right.getPathToRecursive(value, path);
+        if (path.get(path.size() - 1).compareTo(value) != 0)
+            path.remove(path.size() - 1);
+    }
+
+    public List<T> getLeaves() {
+        List<T> leaves = new ArrayList<>();
+        getLeavesRecursive(this, leaves);
+        return leaves;
+    }
+
+    private void getLeavesRecursive(BinaryTreeNode<T> node, List<T> leaves) {
+        if (node.left == null && node.right == null) {
+            leaves.add(node.value);
+            return;
+        }
+        if (node.left != null) getLeavesRecursive(node.left, leaves);
+        if (node.right != null) getLeavesRecursive(node.right, leaves);
+    }
 }

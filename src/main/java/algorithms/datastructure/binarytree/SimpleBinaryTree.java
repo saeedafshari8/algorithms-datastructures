@@ -212,6 +212,18 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
         return null;
     }
 
+    @Override
+    public List<T> getPathTo(T value) {
+        if(root == null) throw new IllegalStateException("Root node cannot be null");
+        return root.getPathTo(value);
+    }
+
+    @Override
+    public List<T> getLeaves() {
+        if(root == null) throw new IllegalStateException("Root node cannot be null");
+        return root.getLeaves();
+    }
+
     public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray) {
         if (sortedArray.length == 0) return new SimpleBinaryTree<>();
         BinaryTreeNode<T> node = new BinaryTreeNode<T>().parseBalancedTree(sortedArray);

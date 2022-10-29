@@ -245,6 +245,42 @@ public class SimpleBinaryTreeTest {
         assertEquals("Node not found", exception.getMessage());
     }
 
+    @Test
+    void getPathToReturnsCorrectListWhenNodeIsAvailable() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        List<Integer> path = simpleBinaryTree.getPathTo(4);
+
+        String actual = arrayToString(path);
+        String expected = "3,4";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getPathToReturnsCorrectListWhenNodeIsAvailable2() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5, 6};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        List<Integer> path = simpleBinaryTree.getPathTo(4);
+
+        String actual = arrayToString(path);
+        String expected = "3,5,4";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getLeavesReturnsCorrectList() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5, 6};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        List<Integer> path = simpleBinaryTree.getLeaves();
+
+        String actual = arrayToString(path);
+        String expected = "2,4,6";
+        assertEquals(expected, actual);
+    }
+
     private static String arrayToString(List<Integer> result) {
         return String.join(",", result.stream().map(String::valueOf).toList());
     }

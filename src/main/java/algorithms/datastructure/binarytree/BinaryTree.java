@@ -26,4 +26,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> nodesAtLevel(int level);
 
     void swap(T value1, T value2);
+
+    List<T> getPathTo(T value);
+
+    List<T> getLeaves();
 }
