@@ -165,4 +165,12 @@ class BinaryTreeNode<T extends Comparable<T>> {
         if (node.left != null) getLeavesRecursive(node.left, leaves);
         if (node.right != null) getLeavesRecursive(node.right, leaves);
     }
+
+    public List<List<T>> getAllPathsToLeaves() {
+        List<List<T>> paths = new ArrayList<>();
+        for (T leaveValue : getLeaves()) {
+            paths.add(getPathTo(leaveValue));
+        }
+        return paths;
+    }
 }

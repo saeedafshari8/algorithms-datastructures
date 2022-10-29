@@ -54,6 +54,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> getPathTo(T value);
 
     List<T> getLeaves();
+
+    List<List<T>> getAllPathsToLeaves();
 }
 ```
 
@@ -112,6 +114,10 @@ Returns the path to a node
 ## List<T> getLeaves()
 
 Returns a tree leaves
+
+## List<List<T>> getAllPathsToLeaves() getAllPathsToLeaves()
+
+Returns a List of path from root node to all leaves
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 

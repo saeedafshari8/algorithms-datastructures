@@ -281,6 +281,27 @@ public class SimpleBinaryTreeTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void getAllPathsToLeavesReturnsCorrectList() {
+        Integer[] sortedArray = new Integer[]{1, 2, 3, 4, 5, 6};
+        BinaryTree<Integer> simpleBinaryTree = SimpleBinaryTree.from(sortedArray);
+
+        List<List<Integer>> paths = simpleBinaryTree.getAllPathsToLeaves();
+
+        int i = 0;
+        for (List<Integer> path : paths) {
+            String actual = arrayToString(path);
+            String expected = switch (i) {
+                case 0 -> "3,1,2";
+                case 1 -> "3,5,4";
+                case 2 -> "3,5,6";
+                default -> "";
+            };
+            i++;
+            assertEquals(expected, actual);
+        }
+    }
+
     private static String arrayToString(List<Integer> result) {
         return String.join(",", result.stream().map(String::valueOf).toList());
     }

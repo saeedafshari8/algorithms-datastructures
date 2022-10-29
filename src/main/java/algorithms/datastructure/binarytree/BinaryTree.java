@@ -30,4 +30,6 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> getPathTo(T value);
 
     List<T> getLeaves();
+
+    List<List<T>> getAllPathsToLeaves();
 }

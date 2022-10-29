@@ -214,14 +214,20 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
 
     @Override
     public List<T> getPathTo(T value) {
-        if(root == null) throw new IllegalStateException("Root node cannot be null");
+        if (root == null) throw new IllegalStateException("Root node cannot be null");
         return root.getPathTo(value);
     }
 
     @Override
     public List<T> getLeaves() {
-        if(root == null) throw new IllegalStateException("Root node cannot be null");
+        if (root == null) throw new IllegalStateException("Root node cannot be null");
         return root.getLeaves();
+    }
+
+    @Override
+    public List<List<T>> getAllPathsToLeaves() {
+        if (root == null) throw new IllegalStateException("Root node cannot be null");
+        return root.getAllPathsToLeaves();
     }
 
     public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray) {
