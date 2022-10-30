@@ -56,6 +56,8 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> getLeaves();
 
     List<List<T>> getAllPathsToLeaves();
+
+    int getMaxPathSum(BinaryTreeNode<Integer> root);
 }
 ```
 
@@ -118,6 +120,10 @@ Returns a tree leaves
 ## List<List<T>> getAllPathsToLeaves() getAllPathsToLeaves()
 
 Returns a List of path from root node to all leaves
+
+## int getMaxPathSum(BinaryTreeNode<Integer> root)
+
+Calculate the maximum path sum
 
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 

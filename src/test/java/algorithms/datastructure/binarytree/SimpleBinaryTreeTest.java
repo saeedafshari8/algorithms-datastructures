@@ -302,6 +302,40 @@ public class SimpleBinaryTreeTest {
         }
     }
 
+    @Test
+    void getMaxPathSumReturnsCorrectResult() {
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(1);
+        root.left = new BinaryTreeNode<>(-2);
+        root.right = new BinaryTreeNode<>(-3);
+        root.left.left = new BinaryTreeNode<>(1);
+        root.left.right = new BinaryTreeNode<>(3);
+        root.right.left = new BinaryTreeNode<>(2);
+        root.left.left.left = new BinaryTreeNode<>(-1);
+        BinaryTree<Integer> simpleBinaryTree = new SimpleBinaryTree<>(root);
+
+        int maxSum = simpleBinaryTree.getMaxPathSum(root);
+
+        assertEquals(3, maxSum);
+    }
+
+    @Test
+    void getMaxPathSumReturnsCorrectResult2() {
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(9);
+        root.left = new BinaryTreeNode<>(6);
+        root.right = new BinaryTreeNode<>(-3);
+        root.right.left = new BinaryTreeNode<>(-6);
+        root.right.right = new BinaryTreeNode<>(2);
+        root.right.right.left = new BinaryTreeNode<>(2);
+        root.right.right.left.left = new BinaryTreeNode<>(-6);
+        root.right.right.left.right = new BinaryTreeNode<>(-6);
+        root.right.right.left.left.left = new BinaryTreeNode<>(-6);
+        BinaryTree<Integer> simpleBinaryTree = new SimpleBinaryTree<>(root);
+
+        int maxSum = simpleBinaryTree.getMaxPathSum(root);
+
+        assertEquals(16, maxSum);
+    }
+
     private static String arrayToString(List<Integer> result) {
         return String.join(",", result.stream().map(String::valueOf).toList());
     }

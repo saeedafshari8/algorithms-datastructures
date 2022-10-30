@@ -230,6 +230,39 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
         return root.getAllPathsToLeaves();
     }
 
+    @Override
+    public int getMaxPathSum(BinaryTreeNode<Integer> root) {
+        allNodesSum = Integer.MIN_VALUE;
+        int oneSideSum = calculateMaxSum(root);
+        return Integer.max(oneSideSum, allNodesSum);
+    }
+
+    private int allNodesSum;
+
+    private int calculateMaxSum(BinaryTreeNode<Integer> node) {
+        if (node.left == null && node.right == null) {
+            return node.getValue();
+        }
+        int nodeValue = node.getValue();
+        if (node.left != null && node.right == null) {
+            int left = calculateMaxSum(node.left);
+            allNodesSum = Integer.max(allNodesSum, Integer.max(left, nodeValue));
+            return Integer.max(left + nodeValue, nodeValue);
+        }
+        if (node.left == null && node.right != null) {
+            int right = calculateMaxSum(node.right);
+            allNodesSum = Integer.max(allNodesSum, Integer.max(right, nodeValue));
+            return Integer.max(right + nodeValue, nodeValue);
+        }
+        int left = calculateMaxSum(node.left);
+        int right = calculateMaxSum(node.right);
+        allNodesSum = Integer.max(allNodesSum, left + right + nodeValue);
+        allNodesSum = Integer.max(allNodesSum, left);
+        allNodesSum = Integer.max(allNodesSum, right);
+        allNodesSum = Integer.max(allNodesSum, nodeValue);
+        return Integer.max(Integer.max(left + nodeValue, right + nodeValue), nodeValue);
+    }
+
     public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray) {
         if (sortedArray.length == 0) return new SimpleBinaryTree<>();
         BinaryTreeNode<T> node = new BinaryTreeNode<T>().parseBalancedTree(sortedArray);

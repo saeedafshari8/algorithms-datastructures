@@ -32,4 +32,6 @@ public interface BinaryTree<T extends Comparable<T>> {
     List<T> getLeaves();
 
     List<List<T>> getAllPathsToLeaves();
+
+    int getMaxPathSum(BinaryTreeNode<Integer> root);
 }
