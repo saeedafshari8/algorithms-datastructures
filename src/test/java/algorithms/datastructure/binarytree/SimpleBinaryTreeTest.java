@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimpleBinaryTreeTest {
 
@@ -334,6 +335,30 @@ public class SimpleBinaryTreeTest {
         int maxSum = simpleBinaryTree.getMaxPathSum(root);
 
         assertEquals(16, maxSum);
+    }
+
+    @Test
+    void createBinaryTreeFromPreOrderAndInOrderReturnsCorrectBinaryTree() {
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(1);
+        root.left = new BinaryTreeNode<>(2);
+        root.right = new BinaryTreeNode<>(3);
+        root.right.left = new BinaryTreeNode<>(4);
+        root.right.right = new BinaryTreeNode<>(5);
+        root.right.right.left = new BinaryTreeNode<>(6);
+        root.right.right.left.left = new BinaryTreeNode<>(7);
+        root.right.right.left.right = new BinaryTreeNode<>(8);
+        root.right.right.left.left.left = new BinaryTreeNode<>(9);
+        BinaryTree<Integer> simpleBinaryTree = new SimpleBinaryTree<>(root);
+        List<Integer> preOrder = simpleBinaryTree.preOrder();
+        List<Integer> inOrder = simpleBinaryTree.inOrder();
+
+        BinaryTree<Integer> actual = SimpleBinaryTree.createBinaryTreeFromPreOrderAndInOrder(preOrder, inOrder);
+
+        assertAll(
+                () -> assertEquals(arrayToString(simpleBinaryTree.preOrder()), arrayToString(actual.preOrder())),
+                () -> assertEquals(arrayToString(simpleBinaryTree.inOrder()), arrayToString(actual.inOrder())),
+                () -> assertEquals(arrayToString(simpleBinaryTree.postOrder()), arrayToString(actual.postOrder()))
+        );
     }
 
     private static String arrayToString(List<Integer> result) {

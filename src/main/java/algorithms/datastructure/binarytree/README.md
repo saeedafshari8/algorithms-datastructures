@@ -128,3 +128,7 @@ Calculate the maximum path sum
 ## public static <T extends Comparable<T>> BinaryTree<T> from(T[] sortedArray)
 
 To create a balanced tree out of a sorted array
+
+## public static <T extends Comparable<T>> BinaryTree<T> createBinaryTreeFromPreOrderAndInOrder(List<T> preOrder, List<T> inOrder)
+
+To create a tree from pre-order and in-order traversals

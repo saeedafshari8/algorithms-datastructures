@@ -268,4 +268,26 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
         BinaryTreeNode<T> node = new BinaryTreeNode<T>().parseBalancedTree(sortedArray);
         return new SimpleBinaryTree<>(node);
     }
+
+    public static <T extends Comparable<T>> BinaryTree<T> createBinaryTreeFromPreOrderAndInOrder(List<T> preOrder, List<T> inOrder) {
+        return new SimpleBinaryTree<>(createNodesFromPreOrderAndInOrderRecursive(0, 0, inOrder.size() - 1, preOrder, inOrder));
+    }
+
+    private static <T extends Comparable<T>> BinaryTreeNode<T> createNodesFromPreOrderAndInOrderRecursive(int preOrderIndex, int inOrderStart, int inOrderEnd, List<T> preOrder, List<T> inOrder) {
+        if (preOrderIndex >= preOrder.size() || inOrderStart > inOrderEnd) return null;
+
+        BinaryTreeNode<T> subTreeRoot = new BinaryTreeNode<>(preOrder.get(preOrderIndex));
+
+        int index = 0;
+        for (int i = inOrderStart; i <= inOrderEnd; i++) {
+            if (inOrder.get(i).compareTo(subTreeRoot.getValue()) == 0) {
+                index = i;
+                break;
+            }
+        }
+
+        subTreeRoot.left = createNodesFromPreOrderAndInOrderRecursive(preOrderIndex + 1, inOrderStart, index - 1, preOrder, inOrder);
+        subTreeRoot.right = createNodesFromPreOrderAndInOrderRecursive(preOrderIndex + index - inOrderStart + 1, index + 1, inOrderEnd, preOrder, inOrder);
+        return subTreeRoot;
+    }
 }
