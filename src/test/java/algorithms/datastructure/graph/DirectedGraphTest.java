@@ -198,4 +198,30 @@ class DirectedGraphTest {
 
         assertFalse(actual);
     }
+
+    /*
+           0
+         /  \
+        1    2  5 -> 6
+          \
+           3
+           |
+           4
+     */
+    @Test
+    void shortestPathBetweenReturnsCorrectValue() {
+        var graph = new DirectedGraph(new int[][]{
+                {0, 1, 1, 0, 0, 0, 0},
+                {0, 0, 0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 6},
+                {0, 0, 0, 0, 0, 0, 0}
+        });
+
+        int actual = graph.shortestPathBetween(0, 4);
+
+        assertEquals(3, actual);
+    }
 }

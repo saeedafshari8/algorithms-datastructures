@@ -127,8 +127,25 @@ public class DirectedGraph implements Graph {
     }
 
     @Override
-    public List<Integer> shortestPathBetween(Integer source, Integer destination) {
-        return null;
+    public int shortestPathBetween(Integer source, Integer destination) {
+        Queue<Map.Entry<Integer, Integer>> aQueue = new ArrayDeque<>();
+        aQueue.add(new AbstractMap.SimpleEntry<>(source, 0));
+        Set<Integer> visited = new HashSet<>();
+
+        while (!aQueue.isEmpty()) {
+            Map.Entry<Integer, Integer> entry = aQueue.remove();
+            if (visited.contains(entry.getKey())) {
+                continue;
+            }
+            visited.add(entry.getKey());
+            if (Objects.equals(entry.getKey(), destination)) return entry.getValue();
+            List<Integer> neighbors = adjacencyMap.get(entry.getKey());
+            if (neighbors == null) continue;
+            for (Integer neighbor : neighbors) {
+                aQueue.add(new AbstractMap.SimpleEntry<>(neighbor, entry.getValue() + 1));
+            }
+        }
+        return -1;
     }
 
     @Override

@@ -37,6 +37,8 @@ public interface Graph {
      */
     List<Integer> topologicalSort(Integer node);
 
+    int shortestPathBetween(Integer source, Integer destination);
+
     static Map<Integer, List<Integer>> directedGraphMatrixToAdjacencyMap(int[][] graph) {
         Map<Integer, List<Integer>> result = new HashMap<>();
         for (int i = 0; i < graph.length; i++) {
@@ -94,3 +96,6 @@ Returns a list of connected components in a graph
 ## List<Integer> topologicalSort(Integer node)
 
 Sorts a DAG: Directed Acyclic Graph 
+
+## int shortestPathBetween(Integer source, Integer destination)
+Returns the shortest path between two nodes

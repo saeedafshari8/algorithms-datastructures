@@ -29,7 +29,7 @@ public interface Graph {
 
     List<List<Integer>> stronglyConnectedComponents();
 
-    List<Integer> shortestPathBetween(Integer source, Integer destination);
+    int shortestPathBetween(Integer source, Integer destination);
 
     int inDegreeOfNode(Integer node);
 
