@@ -123,7 +123,56 @@ public class DirectedGraph implements Graph {
 
     @Override
     public List<List<Integer>> stronglyConnectedComponents() {
-        return null;
+        Set<Integer> visited = new HashSet<>();
+        Stack<Integer> postOrderStack = new Stack<>();
+        for (Integer node : adjacencyMap.keySet()) {
+            if (!visited.contains(node))
+                postOrderDFS(node, postOrderStack, visited);
+        }
+
+        Map<Integer, List<Integer>> reversedAdjMap = getReversedAdjacencyMap();
+
+        visited = new HashSet<>();
+        List<List<Integer>> stronglyConnectedComponents = new ArrayList<>();
+        while (!postOrderStack.isEmpty()) {
+            Integer node = postOrderStack.pop();
+            if (!visited.contains(node)) {
+                List<Integer> component = new ArrayList<>();
+                preOrderDFS(node, visited, reversedAdjMap, component);
+                stronglyConnectedComponents.add(component);
+            }
+        }
+        return stronglyConnectedComponents;
+    }
+
+    private void postOrderDFS(Integer node, Stack<Integer> postOrderStack, Set<Integer> visited) {
+        if (visited.contains(node)) return;
+        visited.add(node);
+        for (Integer neighbor : adjacencyMap.getOrDefault(node, Collections.emptyList())) {
+            postOrderDFS(neighbor, postOrderStack, visited);
+        }
+        postOrderStack.add(node);
+    }
+
+    private Map<Integer, List<Integer>> getReversedAdjacencyMap() {
+        Map<Integer, List<Integer>> reversed = new HashMap<>();
+        for (Map.Entry<Integer, List<Integer>> entry : adjacencyMap.entrySet()) {
+            for (Integer value : entry.getValue()) {
+                List<Integer> valueItems = reversed.getOrDefault(value, new ArrayList<>());
+                valueItems.add(entry.getKey());
+                reversed.put(value, valueItems);
+            }
+        }
+        return reversed;
+    }
+
+    private void preOrderDFS(Integer node, Set<Integer> visited, Map<Integer, List<Integer>> reversedAdjMap, List<Integer> result) {
+        if (visited.contains(node)) return;
+        result.add(node);
+        visited.add(node);
+        for (Integer neighbor : reversedAdjMap.getOrDefault(node, Collections.emptyList())) {
+            preOrderDFS(neighbor, visited, reversedAdjMap, result);
+        }
     }
 
     @Override

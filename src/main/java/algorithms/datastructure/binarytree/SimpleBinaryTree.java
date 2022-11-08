@@ -118,6 +118,19 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
         return heightRecursive(root, 1, 1);
     }
 
+    private int heightRecursive(BinaryTreeNode<T> node, int maxHeight, int height) {
+        if (height > maxHeight) {
+            maxHeight = height;
+        }
+        if (node.left != null) {
+            maxHeight = heightRecursive(node.left, maxHeight, height + 1);
+        }
+        if (node.right != null) {
+            maxHeight = heightRecursive(node.right, maxHeight, height + 1);
+        }
+        return maxHeight;
+    }
+
     @Override
     public List<T> nodesAtLevel(int level) {
         int height = height();
@@ -135,19 +148,6 @@ public class SimpleBinaryTree<T extends Comparable<T>> implements BinaryTree<T> 
         }
         nodesAtLevelRecursive(node.left, result, currentLevel + 1, targetLevel);
         nodesAtLevelRecursive(node.right, result, currentLevel + 1, targetLevel);
-    }
-
-    private int heightRecursive(BinaryTreeNode<T> node, int maxHeight, int height) {
-        if (height > maxHeight) {
-            maxHeight = height;
-        }
-        if (node.left != null) {
-            maxHeight = heightRecursive(node.left, maxHeight, height + 1);
-        }
-        if (node.right != null) {
-            maxHeight = heightRecursive(node.right, maxHeight, height + 1);
-        }
-        return maxHeight;
     }
 
     @Override

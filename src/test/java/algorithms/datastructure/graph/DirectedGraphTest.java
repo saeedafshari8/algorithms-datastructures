@@ -2,9 +2,11 @@ package algorithms.datastructure.graph;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DirectedGraphTest {
@@ -223,5 +225,28 @@ class DirectedGraphTest {
         int actual = graph.shortestPathBetween(0, 4);
 
         assertEquals(3, actual);
+    }
+
+    @Test
+    void stronglyConnectedComponentsReturnsCorrectComponents() {
+        var graph = new DirectedGraph(new int[][]{
+                {0, 1, 0, 0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0, 0, 0, 0},
+                {1, 0, 0, 1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0, 1, 0, 1},
+                {0, 0, 0, 0, 0, 0, 1, 0},
+                {0, 0, 0, 0, 1, 0, 0, 1},
+                {0, 0, 0, 0, 0, 0, 0, 0}
+        });
+
+        List<List<Integer>> actual = graph.stronglyConnectedComponents();
+
+        assertAll(
+                () -> assertThat(actual.get(0)).hasSameClassAs(new ArrayList<>(List.of(0, 1, 2))),
+                () -> assertThat(actual.get(1)).hasSameClassAs(new ArrayList<>(List.of(3))),
+                () -> assertThat(actual.get(2)).hasSameClassAs(new ArrayList<>(List.of(4, 5, 6))),
+                () -> assertThat(actual.get(3)).hasSameClassAs(new ArrayList<>(List.of(7)))
+        );
     }
 }

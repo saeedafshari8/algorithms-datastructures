@@ -85,6 +85,10 @@ Checks if there is a cycle in a graph
 
 Returns a list of connected components in a graph
 
+## List<List<Integer>> stronglyConnectedComponents();
+
+Returns a list of strongly connected components
+
 ## Returns a list of connected components in a graph
 
 ## List<Integer> shortestPathBetween(Integer source, Integer destination);
